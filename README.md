@@ -4,9 +4,7 @@ The idea of this project is to be like a bottleneck for api calls. That means, I
 
 And, of course, this is an example project to show a case, not a production system.
 
-One example that we can mention is about Salesforce Marketing Cloud.
-
-It is limited to 2500 call per minute on commercial calls and 1000 calls per second on transactional calls (references [here](https://help.salesforce.com/s/articleView?id=mktg.mc_overview_limits_api.htm)). So, we will have here two queues, two workers, and one api as entry point.
+Imagine a system that is limited to 2500 call per minute on commercial calls and 1000 calls per second on transactional calls. So, we will have here two queues, two workers, and one api as entry point.
 
 This project has an target api too, it's only to simulate these limits to made tests easy.
 
@@ -63,7 +61,7 @@ They will read it's respective queue respecting the time range for it and will c
 
 ### Target API System
 
-On a real situation, this will be your system or as mentioned before, can be Salesforce Marketing Cloud.
+On a real situation, this will be the system that you want to call.
 
 ## How to run it
 
