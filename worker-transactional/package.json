@@ -1,0 +1,14 @@
+{
+    "name": "worker-transactional",
+    "version": "1.0.0",
+    "description": "Worker Node.js que lê mensagens do RabbitMQ",
+    "main": "worker-transactional.js",
+    "scripts": {
+        "start": "node worker-transactional.js"
+    },
+    "dependencies": {
+        "amqplib": "^0.5.6",
+        "axios": "^1.7.9",
+        "bottleneck": "^2.19.5"
+    }
+}

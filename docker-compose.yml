@@ -1,0 +1,66 @@
+networks:
+  app-network:
+
+services:
+  rabbitmq:
+    build: ./rabbitmq
+    container_name: rabbitmq-server
+    hostname: rabbitmq # Define o hostname dentro do container (importante para clustering)
+    ports:
+      - "5672:5672" # Mantém a porta AMQP
+      - "15672:15672" # Mantém a porta do Management Plugin
+    networks:
+      - app-network
+
+  worker-general:
+    build: ./worker-general
+    container_name: worker-general
+    hostname: worker-general
+    env_file: 
+      - ./env_vars/worker.env
+      - ./env_vars/worker-general.env
+      - ./env_vars/rabbitmq.env
+    depends_on:
+      - rabbitmq
+      - api-target
+    networks:
+      - app-network
+
+  worker-transactional:
+    build: ./worker-transactional
+    container_name: worker-transactional
+    hostname: worker-transactional
+    env_file: 
+      - ./env_vars/worker.env
+      - ./env_vars/worker-transactional.env
+      - ./env_vars/rabbitmq.env
+    depends_on:
+      - rabbitmq
+      - api-target
+    networks: 
+      - app-network
+
+  api:
+    build: ./api
+    container_name: api
+    hostname: api
+    ports:
+      - "3000:3000"
+    env_file: 
+      - ./env_vars/api.env
+      - ./env_vars/rabbitmq.env
+    depends_on:
+      - rabbitmq
+    networks:
+      - app-network
+
+  api-target:
+    build: ./api-target
+    container_name: api-target
+    hostname: api-target
+    ports:
+      - "4000:4000"
+    env_file: 
+      - ./env_vars/api-target.env
+    networks:
+      - app-network

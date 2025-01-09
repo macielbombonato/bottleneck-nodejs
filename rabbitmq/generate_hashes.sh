@@ -1,0 +1,1 @@
+docker run --rm rabbitmq:3-management rabbitmqctl hash_password $1

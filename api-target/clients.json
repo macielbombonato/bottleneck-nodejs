@@ -1,0 +1,10 @@
+[
+    {
+      "clientKey": "client1",
+      "clientSecret": "secret1"
+    },
+    {
+      "clientKey": "client2",
+      "clientSecret": "secret2"
+    }
+  ]

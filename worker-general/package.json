@@ -1,0 +1,14 @@
+{
+    "name": "worker-general",
+    "version": "1.0.0",
+    "description": "Worker Node.js que lê mensagens do RabbitMQ",
+    "main": "worker-general.js",
+    "scripts": {
+        "start": "node worker-general.js"
+    },
+    "dependencies": {
+        "amqplib": "^0.5.6",
+        "axios": "^1.7.9",
+        "bottleneck": "^2.19.5"
+    }
+}

@@ -1,0 +1,317 @@
+{
+	"info": {
+		"name": "Bottleneck-Node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "bottleneck",
+			"item": [
+				{
+					"name": "queue",
+					"item": [
+						{
+							"name": "General",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"mensagem\": \"general\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{server}}/queue/general",
+									"protocol": "http",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"queue",
+										"general"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transactional",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"mensagem\": \"transactional\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{server}}/queue/transactional",
+									"protocol": "http",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"queue",
+										"transactional"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"",
+									"const context = pm.environment.name ? pm.environment : pm.collectionVariables;",
+									"context.set(\"token\", jsonData.token);",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clientKey\": \"{{client}}\",\n    \"clientSecret\": \"{{secret}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{server}}/login",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "help",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{server}}/help",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"help"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Target-System",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"",
+									"const context = pm.environment.name ? pm.environment : pm.collectionVariables;",
+									"context.set(\"token\", jsonData.token);",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clientKey\": \"{{client}}\",\n    \"clientSecret\": \"{{secret}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{target-server}}/login",
+							"protocol": "http",
+							"host": [
+								"{{target-server}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "General",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mensagem\": \"valor\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{target-server}}/general",
+							"protocol": "http",
+							"host": [
+								"{{target-server}}"
+							],
+							"path": [
+								"general"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transactional",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mensagem\": \"valor\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{target-server}}/transactional",
+							"protocol": "http",
+							"host": [
+								"{{target-server}}"
+							],
+							"path": [
+								"transactional"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
